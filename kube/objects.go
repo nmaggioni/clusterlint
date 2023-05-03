@@ -198,11 +198,11 @@ func (c *Client) FetchObjects(ctx context.Context, filter ObjectFilter) (*Object
 		err = annotateFetchError("VolumeSnapshotsV1", err)
 		return
 	})
-	g.Go(func() (err error) {
-		objects.VolumeSnapshotsV1Content, err = csiClient.VolumeSnapshotContents().List(ctx, filter.NamespaceOptions(opts))
-		err = annotateFetchError("VolumeSnapshotsV1Contents", err)
-		return
-	})
+	// g.Go(func() (err error) {
+	// 	objects.VolumeSnapshotsV1Content, err = csiClient.VolumeSnapshotContents().List(ctx, filter.NamespaceOptions(opts))
+	// 	err = annotateFetchError("VolumeSnapshotsV1Contents", err)
+	// 	return
+	// })
 	g.Go(func() (err error) {
 		objects.VolumeSnapshotsBeta, err = csiBetaClient.VolumeSnapshots(corev1.NamespaceAll).List(ctx, filter.NamespaceOptions(opts))
 		err = annotateFetchError("VolumeSnapshotsBeta", err)
